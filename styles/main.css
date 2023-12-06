@@ -1,3 +1,7 @@
+@font-face {
+  font-family: vazir;
+  src: url("../assets/fonts/vazir/Vazir.ttf") format("truetype");
+}
 * {
   padding: 0;
   border: 0;

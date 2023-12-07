@@ -11,10 +11,17 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Document</title>
+    <title>آرایش الکترونی</title>
   </head>
   <body>
     <main>
+      <div class="levelsContainer">
+        <div class="levels">
+          <span>سطح را انتخاب کنید</span>
+          <button class="easy">آسان</button>
+          <button class="hard">سخت</button>
+        </div>
+      </div>
       <div class="winner">آفرین</div>
       <div class="coreDraw">
         <div class="core">
@@ -68,14 +75,14 @@
       </div>
       <div class="container">
         <div class="questions">
-          <input type="text" value="" disabled class="questionsInput" />
           <button class="refresh fa fa-refresh"></button>
+          <div class="questionsInput"></div>
         </div>
         <div class="userAnswer">
           <textarea
             type="text"
             class="userAnswerInput"
-            placeholder="ارایش الکترونی عنصر بالا را بنویسید"
+            placeholder="آرایش الکترونی عنصر بالا را بنویسید"
           ></textarea>
         </div>
       </div>

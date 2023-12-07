@@ -21,6 +21,49 @@ body {
   justify-content: center;
 }
 
+.levelsContainer {
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px);
+  z-index: 8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.levelsContainer .levels {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  box-shadow: 0 0 2px #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #fff;
+  text-align: center;
+}
+.levelsContainer .levels button {
+  padding: 10px;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+.levelsContainer .levels button:active {
+  opacity: 0.8;
+}
+.levelsContainer .levels .easy {
+  background-color: #000000;
+  box-shadow: 0 0 20px #1cc45c;
+}
+.levelsContainer .levels .hard {
+  background-color: #000000;
+  box-shadow: 0 0 20px #c41c1c;
+}
+
 .winner {
   width: 100%;
   max-width: 300px;
@@ -33,6 +76,8 @@ body {
   text-align: center;
   position: fixed;
   top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   transition: all 0.3s;
 }
 
@@ -45,13 +90,13 @@ body {
     box-shadow: 0 0 30px #07a5ee;
   }
   25% {
-    box-shadow: 0 0 30px #2a07ee;
+    box-shadow: 0 0 50px #2a07ee;
   }
   50% {
-    box-shadow: 0 0 30px #7307ee;
+    box-shadow: 0 0 70px #7c28dd;
   }
   75% {
-    box-shadow: 0 0 30px #ee07e2;
+    box-shadow: 0 0 90px #ee07e2;
   }
   100% {
     box-shadow: 0 0 30px #d7ee07;
@@ -231,16 +276,20 @@ body {
 }
 
 .container {
+  width: 100vw;
   padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 80px;
+  gap: 70px;
 }
 .container .questions {
+  width: 100%;
+  max-width: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   gap: 20px;
 }
 .container .questions .refresh {
@@ -255,6 +304,10 @@ body {
   background-color: #fff;
 }
 .container .questions .questionsInput {
+  width: max-content;
+  max-width: 100%;
+  height: max-content;
+  text-wrap: wrap;
   background-color: #0d1731;
   padding: 10px 20px;
   box-shadow: 0 0 40px #0aa5d4;
@@ -280,7 +333,7 @@ body {
   box-shadow: 0 0 40px #ee0707;
 }
 .container .userAnswer .userAnswerInput.right {
-  box-shadow: 0 0 40px #14b83d;
+  box-shadow: 0 0 40px #00ff55;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -3,14 +3,16 @@ async function main() {
   const userAnswer = document.querySelector(".userAnswerInput");
   const refresh = document.querySelector(".refresh");
   const winner = document.querySelector(".winner");
+  const levelsBtn = document.querySelectorAll(".levels button");
 
   let element = await (await fetch("./scripts/elements.json")).json();
   let answers = await (await fetch("./scripts/answers.json")).json();
   let randomNum;
-
+  let easyLevel = true;
   function selectWriteElem() {
+    if (!easyLevel) return hardAnswerSelectWriteElem();
     randomNum = Math.floor(Math.random() * element.length);
-    question.value =
+    question.textContent =
       Number(element.indexOf(element[randomNum])) +
       1 +
       " " +
@@ -18,20 +20,19 @@ async function main() {
     userAnswerKeyUp();
   }
   function userAnswerKeyUp() {
+    if (!easyLevel) return userHardAnswerKeyUp();
     winner.classList.remove("active");
     let answer = answers[element.indexOf(element[randomNum])];
-    if (!userAnswer.value) {
+    let lowerCase = userAnswer.value.toLowerCase();
+    if (!lowerCase) {
       userAnswer.classList.remove("right");
       return userAnswer.classList.remove("dangerBg");
     }
-    if (answer === userAnswer.value) {
+    if (answer === lowerCase) {
       winner.classList.add("active");
       userAnswer.classList.add("right");
       return;
-    } else if (
-      answer.includes(userAnswer.value) &&
-      answer[0] === userAnswer.value[0]
-    ) {
+    } else if (answer.includes(lowerCase) && answer[0] === lowerCase[0]) {
       userAnswer.classList.add("right");
       userAnswer.classList.remove("dangerBg");
     } else {
@@ -39,11 +40,49 @@ async function main() {
       userAnswer.classList.remove("right");
     }
   }
-  function refreshElement() {
-    selectWriteElem();
+  function hardAnswerSelectWriteElem() {
+    randomNum = Math.floor(Math.random() * answers.length);
+    question.textContent = answers[randomNum].toUpperCase();
+    userHardAnswerKeyUp();
+  }
+  function userHardAnswerKeyUp() {
+    winner.classList.remove("active");
+    let answer =
+      answers.indexOf(answers[randomNum]) +
+      1 +
+      " " +
+      element[answers.indexOf(answers[randomNum])].toLowerCase();
+    let lowerCase = userAnswer.value.toLowerCase();
+    if (!lowerCase) {
+      userAnswer.classList.remove("right");
+      return userAnswer.classList.remove("dangerBg");
+    }
+    if (answer === lowerCase) {
+      winner.classList.add("active");
+      userAnswer.classList.add("right");
+      return;
+    } else if (answer.includes(lowerCase) && answer[0] === lowerCase[0]) {
+      userAnswer.classList.add("right");
+      userAnswer.classList.remove("dangerBg");
+    } else {
+      userAnswer.classList.add("dangerBg");
+      userAnswer.classList.remove("right");
+    }
   }
   selectWriteElem();
-  refresh.addEventListener("click", refreshElement);
+  levelsBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.classList.contains("easy") ? (easyLevel = true) : (easyLevel = false);
+      btn.parentElement.parentElement.remove();
+      if (easyLevel) {
+        selectWriteElem();
+      } else {
+        hardAnswerSelectWriteElem();
+        userAnswer.placeholder = "اسم عنصر را با عدد اتمی بنویسید";
+      }
+    });
+  });
+  refresh.addEventListener("click", selectWriteElem);
   userAnswer.addEventListener("keyup", userAnswerKeyUp);
 }
-main();
+document.addEventListener("DOMContentLoaded", main);

@@ -9,6 +9,8 @@ async function main() {
   let answers = await (await fetch("./scripts/answers.json")).json();
   let randomNum;
   let easyLevel = true;
+  let rightAnswer = document.createElement("audio");
+  rightAnswer.src = "./assets/audio/afarin (3).mp3";
   function selectWriteElem() {
     if (!easyLevel) return hardAnswerSelectWriteElem();
     randomNum = Math.floor(Math.random() * element.length);
@@ -29,6 +31,7 @@ async function main() {
       return userAnswer.classList.remove("dangerBg");
     }
     if (answer === lowerCase) {
+      rightAnswer.play();
       winner.classList.add("active");
       userAnswer.classList.add("right");
       return;
@@ -45,6 +48,7 @@ async function main() {
     question.textContent = answers[randomNum].toUpperCase();
     userHardAnswerKeyUp();
   }
+
   function userHardAnswerKeyUp() {
     winner.classList.remove("active");
     let answer =
@@ -58,6 +62,7 @@ async function main() {
       return userAnswer.classList.remove("dangerBg");
     }
     if (answer === lowerCase) {
+      rightAnswer.play();
       winner.classList.add("active");
       userAnswer.classList.add("right");
       return;

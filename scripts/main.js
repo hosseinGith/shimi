@@ -10,7 +10,11 @@ async function main() {
   let randomNum;
   let easyLevel = true;
   let rightAnswer = document.createElement("audio");
-  rightAnswer.src = "./assets/audio/afarin (3).mp3";
+
+  let audios = [
+    "./assets/audio/afarin (3).mp3",
+    "./assets/audio/Effect Sedaye Tashvigh - (5).mp3",
+  ];
   function selectWriteElem() {
     if (!easyLevel) return hardAnswerSelectWriteElem();
     randomNum = Math.floor(Math.random() * element.length);
@@ -31,6 +35,9 @@ async function main() {
       return userAnswer.classList.remove("dangerBg");
     }
     if (answer === lowerCase) {
+      rightAnswer.pause();
+      let random = Math.round(Math.random() * audios.length);
+      rightAnswer.src = audios[random];
       rightAnswer.play();
       winner.classList.add("active");
       userAnswer.classList.add("right");
@@ -62,6 +69,8 @@ async function main() {
       return userAnswer.classList.remove("dangerBg");
     }
     if (answer === lowerCase) {
+      let random = Math.round(Math.random() * audios.length);
+      rightAnswer.src = audios[random];
       rightAnswer.play();
       winner.classList.add("active");
       userAnswer.classList.add("right");
